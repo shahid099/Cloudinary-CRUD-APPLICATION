@@ -9,8 +9,7 @@ const dataBaseConnection = ()=> {
     }) 
     } catch (error) {
         console.log(error.message);
-    }
-    
+    }   
 }
 
 export default dataBaseConnection;

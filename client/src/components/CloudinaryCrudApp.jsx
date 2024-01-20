@@ -1,55 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
-
+import MyContext from '../contextapi/createContext';
 const CloudinaryCrudApp = () => {
-  const [file, setFile] = useState(null);
-  const [mediaList, setMediaList] = useState([]);
-
-  useEffect(() => {
-    fetchMedia();
-  }, []);
-
-  const fetchMedia = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_ENTPOINT}/retrieve`);
-      setMediaList(response.data.resources);
-    } catch (error) {
-      console.error('Error fetching media:', error);
-    }
-  };
+  const data = useContext(MyContext);
+  const { file, setFile, mediaList, setMediaList, fetchMedia, handleDelete, handleUpload } = data;
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
 
-  const handleUpload = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      const response = await axios.post(`${import.meta.env.VITE_ENTPOINT}/upload`, formData);
-      console.log(response.data);
-
-      // Refresh the media list after upload
-      fetchMedia();
-    } catch (error) {
-      console.error('Error uploading media:', error);
-    }
-  };
-
-  const handleDelete = async (publicId) => {
-    try {
-      const response = await axios.delete(`${import.meta.env.VITE_ENTPOINT}/delete/${publicId}`);
-      console.log(response.data);
-
-      // Refresh the media list after deletion
-      fetchMedia();
-    } catch (error) {
-      console.error('Error deleting media:', error);
-    }
-  };
 
   return (
     <div className='box'>
