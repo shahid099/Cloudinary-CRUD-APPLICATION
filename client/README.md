@@ -1,8 +1,33 @@
-# React + Vite
+# Cloudinary CRUD Application
+# What is Cloudinary
+Streamline media management and improve user experience by automatically delivering images and videos, enhanced and optimized for every user.
+Build a CRUD Web Application using the Cloudinary with MERN Stack.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Installation
 
-Currently, two official plugins are available:
+Use the package manager npm to install Cloudinary.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm i cloudinary
+```
+
+# Configurations
+```
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+  });
+```
+# Get Data
+```JavaScript
+const result = await cloudinary.api.resources();
+```
+# Post Data
+```JavaScript
+const result = await cloudinary.uploader.upload(req.file.path)
+```
+# Delete Data
+```JavaScipt
+const result = await cloudinary.uploader.destroy(req.params.public_id);
+```
